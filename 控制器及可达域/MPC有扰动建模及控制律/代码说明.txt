@@ -1,0 +1,5 @@
+LPV：以t为参数的线性变参数模型
+TP：张量积变换求顶点矩阵AA和BB
+MPC_6d：鲁棒MPC控制器
+MPC_6D_parameter：参数鲁棒MPC控制器
+nonlinear_model：非线性栖落模型

@@ -1,0 +1,11 @@
+打开switch_k_6d_im，计算控制律。
+guiji_6d:指定轨迹仿真
+x0_6d:保存的是指定参考轨迹。
+fly2_6d:用于取点计算其线性方程。
+flying2_6d:是无初始偏差的非线性模型S函数。
+flying3_6d_bias:是有初始偏差的非线性模型S函数。
+kt_switch_6d：为非线性simulink模型提供K矩阵。
+linear_kt_S：为线性simulink模型提供K矩阵（与kt_switch_6d里的K是相同的，只是提供方式不同）。
+linear_flying2：有初始偏差的线性化切换模型S函数。
+lunwen_huitu：非线性simulink模型。
+linear_model：线性simulink模型。
