@@ -18,7 +18,7 @@ load('Kall线性离散无扰动.mat');
 load('xr206.mat');
 load('ur206.mat');
 tol = 10^-12;
-partitionBnd = 5;                       % max # partitions that can occur before terminating
+partitionBnd = 6;                       % max # partitions that can occur before terminating
 partitionNum = 0;
 load('xr(0.0.01.2).mat');
 % load('ur(0.0.01.2).mat');
@@ -339,8 +339,8 @@ toc;
 % queue(1).Xlow = queue(1).Xlow + x_ref_loc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
-save('LQR(3,2)线性离散无扰动落点范围1.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
-plotReach(Reach,initial_centers,initial_radii,xup,xlow);
+save('LQR(3,2)线性离散无扰动1.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
+% plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');
 % disp(simulation_number);

@@ -129,7 +129,7 @@ unsafeflag = 0;
 % end
 
 %%%%% Check if safety properties of current mode are satisfied %%%%%
-[safeflag,~] = isSafe(cov.x0,cov.Xup,cov.Xlow,cov.T,cov.deltae,cov.TT);
+[safeflag,~] = isSafe(cov.x0,cov.Xup,cov.Xlow,cov.T,cov.deltae,cov.TT,xr206);
 % subplot(1, 2, 2);
 % for i = 1:length(cov.T)
 %     reach = horzcat([cov.Xup(i,5); cov.Xup(i,5); ...

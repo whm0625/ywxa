@@ -5,7 +5,7 @@ function plotReach(Reach,initial_centers,initial_radii,xup,xlow)
 load('xr(0.0.01.2).mat');
 load('ur(0.0.01.2).mat');
 % load('MPC(5,2.5).mat');
-load('LQR(3,2)线性离散无扰动落点范围1.mat');
+load('LQR(3,2)线性离散无扰动1.mat');
 % figure;
 % grid on; grid minor; hold on
 % xlabel('Position (x)');
@@ -43,8 +43,8 @@ h_center = xr_h(200); % h的中心
 % x_radius = 0.15; % x的半径
 % h_radius = 0.15; % h的半径
 % 落点范围1
-x_radius = 0.1; % x的半径
-h_radius = 0.1; % h的半径
+x_radius = 0.15; % x的半径
+h_radius = 0.15; % h的半径
 %     radius = 0.15;
 %     plot(x_ref_x, x_ref_h, 'Color', 'r', 'LineWidth', 2);
 %     plot(xr_x(200), xr_h(200), 'ok');
