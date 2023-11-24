@@ -69,7 +69,7 @@ flag = true;
 while (flag)
     % Compute the reachtube from the cover 'queue(start)' and check its safety
    
-    [queue(start),safeflag,unsafeflag]=computeReachtube1(queue(start),[]);
+    [queue(start),safeflag,unsafeflag]=computeReachtube1(queue(start));
     %         x_ref = get_reference_trajectory(queue(start).T');
     %         x_ref_loc = [x_ref, zeros(size(x_ref, 1), 1)];
     % %         queue(start).X = queue(start).X + x_ref_loc;
@@ -339,7 +339,7 @@ toc;
 % queue(1).Xlow = queue(1).Xlow + x_ref_loc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
-save('LQR(4,2)线性离散无扰动deltae变化量约束.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
+save('LQR(3,2)线性离散无扰动落点范围1.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
 plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');

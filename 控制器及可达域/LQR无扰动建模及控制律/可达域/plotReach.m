@@ -5,7 +5,7 @@ function plotReach(Reach,initial_centers,initial_radii,xup,xlow)
 load('xr(0.0.01.2).mat');
 load('ur(0.0.01.2).mat');
 % load('MPC(5,2.5).mat');
-load('LQR(4,2)线性离散无扰动deltae变化量约束.mat');
+load('LQR(3,2)线性离散无扰动落点范围1.mat');
 % figure;
 % grid on; grid minor; hold on
 % xlabel('Position (x)');
@@ -40,8 +40,11 @@ xr_x = xr(:, 5); % 提取参考轨迹的x值
 xr_h = xr(:, 6); % 提取参考轨迹的h值
 x_center = xr_x(200); % x的中心
 h_center = xr_h(200); % h的中心
-x_radius = 0.15; % x的半径
-h_radius = 0.15; % h的半径
+% x_radius = 0.15; % x的半径
+% h_radius = 0.15; % h的半径
+% 落点范围1
+x_radius = 0.1; % x的半径
+h_radius = 0.1; % h的半径
 %     radius = 0.15;
 %     plot(x_ref_x, x_ref_h, 'Color', 'r', 'LineWidth', 2);
 %     plot(xr_x(200), xr_h(200), 'ok');
@@ -58,7 +61,7 @@ grid on; grid minor; hold on
 xlabel('Position (x)');
 ylabel('Height (h)');
 
-batchsize = 900;
+batchsize = 1000;
 numPipes = size(valid_xup_all, 3);
 for batchstart = 1:batchsize:numPipes
     batchend = min(batchstart+batchsize-1,numPipes);

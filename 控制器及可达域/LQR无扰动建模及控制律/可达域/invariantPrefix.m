@@ -1,4 +1,4 @@
-function [Reach,xtemp] = invariantPrefix(Reach, loc,xtemp)
+function [Reach] = invariantPrefix(Reach, loc)
 % Returns the portion of the reachtube that may or must be in mode 'loc'
 tolerance = 1e-10;
 % Initialize mode_indices cell array
@@ -28,5 +28,5 @@ Reach.Xlow = Reach.Xlow(indices, :);
 Reach.TT = Reach.TT(indices, :);
 Reach.deltae = Reach.deltae(indices, :);
 Reach.T = Reach.T(indices);
-xtemp = xtemp(indices, :);
+% xtemp = xtemp(indices, :);
 end

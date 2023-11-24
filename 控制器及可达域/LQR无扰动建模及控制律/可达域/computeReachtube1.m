@@ -1,4 +1,5 @@
-function [cov,safeflag,unsafeflag]=computeReachtube1(cov,xtemp0)
+% function [cov,safeflag,unsafeflag]=computeReachtube1(cov,xtemp0)
+function [cov,safeflag,unsafeflag]=computeReachtube1(cov)
 global dim time_span tol fulldim Kall Aall Ball xr206 ur206
 % tol = 10^-12;
 % load('xr206.mat');
@@ -39,12 +40,12 @@ deltae_temp = [];
 for i = 1:dim
     kk = uint8(cov.t0*100 + 1);
     k=1;
-    if kk==1
-        xtemp(k,:) = x(k,:)'+V0(1:6,i);
-    else
-         xtemp(k,:) = xtemp0;
-    end
-    
+%     if kk==1
+%         xtemp(k,:) = x(k,:)'+V0(1:6,i);
+%     else
+%          xtemp(k,:) = xtemp0;
+%     end
+    xtemp(k,:) = x(k,:)'+V0(1:6,i);
     for t=timespan
         Ki = Kall(:,:,kk);
         A = Aall(:,:,kk);
@@ -62,7 +63,7 @@ for i = 1:dim
         kk=kk+1;
     end
     
-    xtemp = xtemp(1:length(xtemp)-1,:);
+     xtemp = xtemp(1:length(xtemp)-1,:);
     TT_temp = [TT_temp utemp(:,1)];
     deltae_temp = [deltae_temp utemp(:,2)];
     V{i} = x(:,1:dim)- xtemp(:,1:dim);
@@ -119,8 +120,8 @@ end
 % end
 unsafeflag = 0;
 
-[cov,xtemp] = invariantPrefix(cov,init_state(end),xtemp);
-xtemp0 = xtemp(end,:);
+[cov] = invariantPrefix(cov,init_state(end));
+% xtemp0 = xtemp(end,:);
 
 % cov.x0 = delta_X(length(cov.T), :);
 % for k = 1:6
@@ -144,7 +145,7 @@ if ~unsafeflag %safeflag == 1 && unsafeflag == 0
     nextCov = nextRegions(cov,init_state(end));
     for j=1:length(nextCov)
         if ~isempty(nextCov{j})
-            [nextCov{j},nextSafe,~] = computeReachtube1(nextCov{j},xtemp0);
+            [nextCov{j},nextSafe,~] = computeReachtube1(nextCov{j});
             if nextSafe == 0
                 % Break and partition initial set
                 safeflag = 0;

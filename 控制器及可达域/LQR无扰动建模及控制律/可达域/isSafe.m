@@ -92,11 +92,20 @@ function [safe, unsafe] = isSafe(X, Xup, Xlow,T,deltae,TT)
                     end
                 end
             end
-
+            
             xr_last = xr206(201,:);
+            
+            %             if   Xup(indice,1)-xr_last(1,1)>0.5 || Xlow(indice,1)-xr_last(1,1)<-0.5 || ...
+            %                     Xup(indice,5)-xr_last(1,5)>0.15 || Xlow(indice,5)-xr_last(1,5)<-0.15 || ...
+            %                     Xup(indice,6)-xr_last(1,6)>0.15 || Xlow(indice,6)-xr_last(1,6)<-0.15
+            %                 safe = 0;
+            %                 disp('unsafe ending(x.h) ');
+            %                 return
+            %             end
+            % 落点范围1
             if   Xup(indice,1)-xr_last(1,1)>0.5 || Xlow(indice,1)-xr_last(1,1)<-0.5 || ...
-                    Xup(indice,5)-xr_last(1,5)>0.15 || Xlow(indice,5)-xr_last(1,5)<-0.15 || ...
-                    Xup(indice,6)-xr_last(1,6)>0.15 || Xlow(indice,6)-xr_last(1,6)<-0.15
+                    Xup(indice,5)-xr_last(1,5)>0.1 || Xlow(indice,5)-xr_last(1,5)<-0.1 || ...
+                    Xup(indice,6)-xr_last(1,6)>0.1 || Xlow(indice,6)-xr_last(1,6)<-0.1
                 safe = 0;
                 disp('unsafe ending(x.h) ');
                 return
