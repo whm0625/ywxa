@@ -84,12 +84,12 @@ else if tz<0.5
     end
 end
 deltaer=subs(deltaer,tz,t);
-v2=subs(Vr,t,tt);
-miu2=subs(miur,t,tt);
-alpha2=subs(alphar,t,tt);
-q2=subs(qr,t,tt);
-x2=subs(xr,t,tt);
-h2=subs(hr,t,tt);
+% v2=subs(Vr,t,tt);
+% miu2=subs(miur,t,tt);
+% alpha2=subs(alphar,t,tt);
+% q2=subs(qr,t,tt);
+% x2=subs(xr,t,tt);
+% h2=subs(hr,t,tt);
 %% Functions about 't';
 Soriginxin=subs(Sorigin,Vs,Vr);
 Soriginxin=subs(Soriginxin,mius,miur);

@@ -1,0 +1,24 @@
+function safe = issafe(x,u)
+load('xr(0.0.01.2).mat');
+xr_last = xr(201,:);
+safe = true;
+for i=1:size(x,1)
+    if x(i,1)>25 || x(i,1)<0 || ...
+            x(i,2)>pi/4 || x(i,2)<-pi/4 || ...
+            x(i,3)>pi/2 || x(i,3)<-pi/2 || ...
+            x(i,4)>3.5 || Xup(i,4)<-3.5|| ...
+            Xup(i,5)>16 || Xup(i,5)<-0.5 || ...
+            Xup(i,6)>10 || Xup(i,6)<-0.5
+        safe = 0;
+        disp('unsafe ending xup ');
+        return
+    end
+end
+    if   x(201,1)-xr_last(1,1)>0.5 || x(201,1)-xr_last(1,1)<-0.5 || ...
+            x(201,5)-xr_last(1,5)>0.15 || x(201,5)-xr_last(1,5)<-0.15 || ...
+            x(201,6)-xr_last(1,6)>0.15 || x(201,6)-xr_last(1,6)<-0.15
+    safe = false;
+%     disp('unsafe');
+    return
+end
+end

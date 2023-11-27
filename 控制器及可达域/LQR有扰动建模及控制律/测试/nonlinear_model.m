@@ -8,12 +8,12 @@ Se=0.054;
 % S=Sw;
 S=Sw+Se;
 Le=0.235;
-% if t<=0.7
-%     Vw=-0.5-sin(1.43*pi*t);
-% else
-%     Vw=-0.5;  
-% end
-Vw=0;
+if t<=0.7
+    Vw=-0.5-sin(1.43*pi*t);
+else
+    Vw=-0.5;  
+end
+% Vw=0;
 V=x(1);
 miu=x(2);
 alpha=x(3);

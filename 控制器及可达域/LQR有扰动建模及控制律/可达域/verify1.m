@@ -14,11 +14,11 @@ dbstop if error
 safe = -1;                              % -1: UNKNOWN, 0: UNSAFE, 1: SAFE
 global tol dim fulldim time_span guardPassive loc Kall Aall Ball xr206 ur206
 load('Jaccobi.mat');
-load('Kall线性离散有扰动.mat');
+load('Kall线性离散无扰动.mat');
 load('xr206.mat');
 load('ur206.mat');
 tol = 10^-12;
-partitionBnd = 5;                       % max # partitions that can occur before terminating
+partitionBnd = 6;                       % max # partitions that can occur before terminating
 partitionNum = 0;
 load('xr(0.0.01.2).mat');
 % load('ur(0.0.01.2).mat');
@@ -32,7 +32,7 @@ if nargin < 3
 % initial_state=[11  0.1  0.2  0.1  0.5 -0.5 1];
     %     initial_state  = [11  0.1  0.3  0.1  1 -1 1];
     %     initial_diameter = [0.2,0.02,0.03,0.1,1,1]';     % determines initial set with initial_state as center point
-    initial_diameter = [0,0,0,0,4,2];     % determines initial set with initial_state as center point
+    initial_diameter = [0,0,0,0,3,2];     % determines initial set with initial_state as center point
 else
     guardPassive = guardTime;
 end
@@ -324,7 +324,7 @@ toc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
 save('LQR(4,2)线性离散有扰动.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
-plotReach(Reach,initial_centers,initial_radii,xup,xlow);
+% plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');
 % disp(simulation_number);
