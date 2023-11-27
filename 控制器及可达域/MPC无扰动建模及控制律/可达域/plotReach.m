@@ -5,7 +5,7 @@ function plotReach(Reach,initial_centers,initial_radii,xup,xlow)
 load('xr(0.0.01.2).mat');
 load('ur(0.0.01.2).mat');
 % load('MPC(5,2.5).mat');
-load('MPC(4,2)线性无扰动.mat');
+load('MPC(3,2)线性无扰动.mat');
 % figure;
 % grid on; grid minor; hold on
 % xlabel('Position (x)');
@@ -38,8 +38,8 @@ valid_xlow_all = xlow(valid_indices,:,:);
 % x_ref = get_reference_trajectory(timespan);
 xr_x = xr(:, 5); % 提取参考轨迹的x值
 xr_h = xr(:, 6); % 提取参考轨迹的h值
-x_center = xr_x(200); % x的中心
-h_center = xr_h(200); % h的中心
+x_center = xr_x(201); % x的中心
+h_center = xr_h(201); % h的中心
 x_radius = 0.15; % x的半径
 h_radius = 0.15; % h的半径
 %     radius = 0.15;

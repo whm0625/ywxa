@@ -12,32 +12,27 @@ function [safe,Reach,xup,xlow,initial_centers,initial_radii]=verify1(initial_sta
 % profile on
 dbstop if error
 safe = -1;                              % -1: UNKNOWN, 0: UNSAFE, 1: SAFE
-global tol dim fulldim time_span guardPassive loc
+global tol dim fulldim time_span guardPassive loc F Aall Ball xr206 ur206
 tol = 10^-12;
-partitionBnd = 5;                       % max # partitions that can occur before terminating
+partitionBnd = 6;                       % max # partitions that can occur before terminating
 partitionNum = 0;
-load('xr(0.0.01.2).mat');
-% load('ur(0.0.01.2).mat');
-% load('F_mpc.mat');
-% x_ref = get_reference_trajectory(time_span);
+load('Jaccobi.mat');
+load('F线性无扰动.mat');
+load('xr206.mat');
+load('ur206.mat');
+
 %%%%% Initialize problem parameters %%%%%
 if nargin < 3
     disp('Not enough input arguments, using default values');
     %      initial_state  = [0 0 0 0 0 0 1]; % [delta_v,delta_miu,delta_alpha,delta_q,delta_x,delta_h,loc]
-     initial_state = [xr(1,:) 1];
+     initial_state = [xr206(1,:) 1];
 % initial_state=[11  0.1  0.2  0.1  0.5 -0.5 1];
     %     initial_state  = [11  0.1  0.3  0.1  1 -1 1];
     %     initial_diameter = [0.2,0.02,0.03,0.1,1,1]';     % determines initial set with initial_state as center point
-    initial_diameter = [0,0,0,0,4,2];     % determines initial set with initial_state as center point
+    initial_diameter = [0,0,0,0,3,2];     % determines initial set with initial_state as center point
 else
     guardPassive = guardTime;
 end
-% test_state = [
-%     [0 0 0 0 0.7 0.35 1];
-%     [0 0 0 0 0.6 -0.5 1];
-%     [0 0 0 0 -0.5 -0.25 1];
-%     [0 0 0 0 -0.1 0.1 1]
-%     ];
 count = 0;
 Reach = [];
 fulldim = 7;
@@ -319,8 +314,8 @@ toc;
 % queue(1).Xlow = queue(1).Xlow + x_ref_loc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
-save('MPC(4,2)线性无扰动.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
-plotReach(Reach,initial_centers,initial_radii,xup,xlow);
+save('MPC(3,2)线性无扰动.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
+% plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');
 % disp(simulation_number);
