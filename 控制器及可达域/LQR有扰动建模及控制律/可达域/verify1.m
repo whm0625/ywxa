@@ -14,7 +14,7 @@ dbstop if error
 safe = -1;                              % -1: UNKNOWN, 0: UNSAFE, 1: SAFE
 global tol dim fulldim time_span guardPassive loc Kall Aall Ball xr206 ur206
 load('Jaccobi.mat');
-load('Kall线性离散无扰动.mat');
+load('Kall线性离散无扰动1.mat');
 load('xr206.mat');
 load('ur206.mat');
 tol = 10^-12;
@@ -70,33 +70,34 @@ while (flag)
     % Compute the reachtube from the cover 'queue(start)' and check its safety
     
     [queue(start),safeflag,unsafeflag]=computeReachtube1(queue(start));
-%         x_ref = get_reference_trajectory(queue(start).T');
-%         x_ref_loc = [x_ref, zeros(size(x_ref, 1), 1)];
-% %         queue(start).X = queue(start).X + x_ref_loc;
-% %         queue(start).Xup = queue(start).Xup + x_ref_loc;
-% %         queue(start).Xlow = queue(start).Xlow + x_ref_loc;
-%             figure;
-%             hold on;
-%             for i = 1:length(queue(start).T)
-%                 reach = horzcat([queue(start).Xup(i,5); queue(start).Xup(i,5); ...
-%                     queue(start).Xlow(i,5); queue(start).Xlow(i,5);queue(start).Xup(i,5)], ...
-%                     [queue(start).Xup(i,6); queue(start).Xlow(i,6); ...
-%                     queue(start).Xlow(i,6); queue(start).Xup(i,6); queue(start).Xup(i,6)]);
-%                 % reach = horzcat(Reach.Yup(i, :), Reach.Ylow(i, :));
-%                 %     viscircles([x0, h0], 0.15, 'Color', [0.5, 0.5, 0.5], 'LineStyle', '--', 'LineWidth', 1);
-%                 patch(reach(:, 1), reach(:, 2), [0, 0.5, 1],'FaceAlpha', 1, 'EdgeColor', 'none');
-%             end
-%             plot(queue(start).X(:,5), queue(start).X(:,6), 'Color', 'r', 'LineWidth', 2);
-%          plot(queue(start).Xtemp(:,5), queue(start).Xtemp(:,6), 'Color', 'b', 'LineWidth', 2);
-%             hold on;
-% %             x_ref = get_reference_trajectory(timespan);
-%             xr_x = xr(:, 5); % 提取参考轨迹的x值
-%             xr_h = xr(:, 6); % 提取参考轨迹的h值
-%             radius = 0.15;
-%             plot(xr_x, xr_h, 'Color', 'r', 'LineWidth', 2);
-%         %     hold on; %
-%             plot(xr_x(end), xr_h(end), 'ok');
-%             viscircles([xr_x(end), xr_h(end)], radius, 'Color', 'k', 'LineStyle', '--', 'LineWidth', 1);
+    %         x_ref = get_reference_trajectory(queue(start).T');
+    %         x_ref_loc = [x_ref, zeros(size(x_ref, 1), 1)];
+    % %         queue(start).X = queue(start).X + x_ref_loc;
+    % %         queue(start).Xup = queue(start).Xup + x_ref_loc;
+    % %         queue(start).Xlow = queue(start).Xlow + x_ref_loc;
+    %             figure;
+    %             hold on;
+    %             for i = 1:length(queue(start).T)
+    %                 reach = horzcat([queue(start).Xup(i,5); queue(start).Xup(i,5); ...
+    %                     queue(start).Xlow(i,5); queue(start).Xlow(i,5);queue(start).Xup(i,5)], ...
+    %                     [queue(start).Xup(i,6); queue(start).Xlow(i,6); ...
+    %                     queue(start).Xlow(i,6); queue(start).Xup(i,6); queue(start).Xup(i,6)]);
+    %                 % reach = horzcat(Reach.Yup(i, :), Reach.Ylow(i, :));
+    %                 %     viscircles([x0, h0], 0.15, 'Color', [0.5, 0.5, 0.5], 'LineStyle', '--', 'LineWidth', 1);
+    %                 patch(reach(:, 1), reach(:, 2), [0, 0.5, 1],'FaceAlpha', 1, 'EdgeColor', 'none');
+    %             end
+    %             plot(queue(start).X(:,5), queue(start).X(:,6), 'Color', 'r', 'LineWidth', 2);
+    %          plot(queue(start).Xtemp(:,5), queue(start).Xtemp(:,6), 'Color', 'b', 'LineWidth', 2);
+    %             hold on;
+    % %             x_ref = get_reference_trajectory(timespan);
+    %             xr_x = xr(:, 5); % 提取参考轨迹的x值
+    %             xr_h = xr(:, 6); % 提取参考轨迹的h值
+    %             radius = 0.15;
+    %             plot(xr_x, xr_h, 'Color', 'r', 'LineWidth', 2);
+    %         %     hold on; %
+    %             plot(xr_x(end), xr_h(end), 'ok');
+    %             viscircles([xr_x(end), xr_h(end)], radius, 'Color', 'k', 'LineStyle', '--', 'LineWidth', 1);
+    safeflag = issafe1(queue(start),xr);
     disp('Simulating from:');
     disp(queue(start).x0);
     disp('with delta:');
@@ -323,7 +324,7 @@ toc;
 % queue(1).Xlow = queue(1).Xlow + x_ref_loc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
-save('LQR(4,2)线性离散有扰动.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
+save('LQR(3,2)线性离散有扰动加过程.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
 % plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');

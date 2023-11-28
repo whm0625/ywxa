@@ -97,22 +97,8 @@ while (flag)
     %         %     hold on; %
     %             plot(xr_x(end), xr_h(end), 'ok');
     %             viscircles([xr_x(end), xr_h(end)], radius, 'Color', 'k', 'LineStyle', '--', 'LineWidth', 1);
-%     for i = 2:size(queue(start).deltae,1)
-%         ddeltae(i-1,:) = queue(start).deltae(i,:) - queue(start).deltae(i-1,:);
-%     end
-%     for i = 1:size(ddeltae, 1)
-%         for j = 1:size(ddeltae, 2)
-%             if ddeltae(i, j) > 0.02 || ddeltae(i, j) < -0.02
-%                 safeflag = 0;
-%                 disp('Unsafe delta_deltae');
-%                 break;  % 退出内层循环
-%             end
-%         end
-%         if safeflag == 0
-%             break;  % 退出外层循环
-%         end
-%     end
-    
+
+    safeflag = issafe1(queue(start),xr);
     disp('Simulating from:');
     disp(queue(start).x0);
     disp('with delta:');
@@ -339,7 +325,7 @@ toc;
 % queue(1).Xlow = queue(1).Xlow + x_ref_loc;
 Reach = queue(1);
 % filename='MPC(5,2.5)';
-save('LQR(3,2)线性离散无扰动1.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
+save('LQR(3,2)线性离散无扰动加过程安全.mat', 'Reach','initial_centers','initial_radii','xup','xlow');
 % plotReach(Reach,initial_centers,initial_radii,xup,xlow);
 
 % disp('number of simulations:');

@@ -5,7 +5,7 @@ function plotReach(Reach,initial_centers,initial_radii,xup,xlow)
 load('xr(0.0.01.2).mat');
 load('ur(0.0.01.2).mat');
 % load('MPC(5,2.5).mat');
-load('LQR(4,2)线性离散有扰动.mat');
+load('LQR(4,2)线性离散有扰动加过程.mat');
 % figure;
 % grid on; grid minor; hold on
 % xlabel('Position (x)');
