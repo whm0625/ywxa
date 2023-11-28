@@ -5,6 +5,7 @@ function [safe, unsafe] = isSafe(X, Xup, Xlow,T,deltae,TT,xr206)
     safe = 1;
     unsafe = 0;
     loc = X(1,end);
+    xr_last = xr206(201,:);
     if nargin == 1
         loc = -1; % Check only simulation trace
     end
@@ -52,6 +53,17 @@ function [safe, unsafe] = isSafe(X, Xup, Xlow,T,deltae,TT,xr206)
                         return
                     end
                 end
+                
+                if   abs(Xup(i,1)-xr_last(1,1))<0.5 &&...
+                        abs(Xup(i,5)-xr_last(1,5))<0.15 && ...
+                        abs(Xup(i,6)-xr_last(1,6))<0.15 && ...
+                        abs(Xlow(i,1)-xr_last(1,1))<0.5 && ...
+                        abs(Xlow(i,5)-xr_last(1,5))<0.15 && ...
+                        abs(Xlow(i,6)-xr_last(1,6))<0.15
+                    
+                    return
+                end
+                
             end
         case 21
             tolerance = 1e-4;
@@ -92,9 +104,6 @@ function [safe, unsafe] = isSafe(X, Xup, Xlow,T,deltae,TT,xr206)
                     end
                 end
             end
-            
-            xr_last = xr206(201,:);
-            
             %             if   Xup(indice,1)-xr_last(1,1)>0.5 || Xlow(indice,1)-xr_last(1,1)<-0.5 || ...
             %                     Xup(indice,5)-xr_last(1,5)>0.15 || Xlow(indice,5)-xr_last(1,5)<-0.15 || ...
             %                     Xup(indice,6)-xr_last(1,6)>0.15 || Xlow(indice,6)-xr_last(1,6)<-0.15

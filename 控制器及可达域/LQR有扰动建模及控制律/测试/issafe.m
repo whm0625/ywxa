@@ -12,14 +12,21 @@ for i=1:size(x,1)
         safe = false;
         return
     end
-end
-for i=1:size(u,1)
+    
     if u(i,1)>8 || u(i,1)<0 || ...
             u(i,2)>pi/3 || u(i,2)<-pi/3
         safe = false;
         return
     end
+    if x(i,1)-xr_last(1,1)<0.5 && x(i,1)-xr_last(1,1)>-0.5 && ...
+            x(i,5)-xr_last(1,5)<0.15 && x(i,5)-xr_last(1,5)>-0.15 && ...
+            x(i,6)-xr_last(1,6)<0.15 && x(i,6)-xr_last(1,6)>-0.15
+        
+        return
+    end
+    
 end
+
 if   x(201,1)-xr_last(1,1)>0.5 || x(201,1)-xr_last(1,1)<-0.5 || ...
         x(201,5)-xr_last(1,5)>0.15 || x(201,5)-xr_last(1,5)<-0.15 || ...
         x(201,6)-xr_last(1,6)>0.15 || x(201,6)-xr_last(1,6)<-0.15

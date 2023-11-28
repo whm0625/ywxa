@@ -1,10 +1,10 @@
 tic;
 load('xr(0.0.01.2).mat');
 load('ur(0.0.01.2).mat');
-load('Kall线性离散无扰动.mat');
+load('Kall线性离散无扰动1.mat');
 % 生成测试用的时间向量
 t_span = 0:0.01:2;
-random_count = 1000000;
+random_count = 10000;
 % 初始化准确计数器
 accurate_count = 0;
 

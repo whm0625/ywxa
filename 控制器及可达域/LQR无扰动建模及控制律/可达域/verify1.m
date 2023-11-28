@@ -14,11 +14,11 @@ dbstop if error
 safe = -1;                              % -1: UNKNOWN, 0: UNSAFE, 1: SAFE
 global tol dim fulldim time_span guardPassive loc Kall Aall Ball xr206 ur206
 load('Jaccobi.mat');
-load('Kall线性离散无扰动.mat');
+load('Kall线性离散无扰动1.mat');
 load('xr206.mat');
 load('ur206.mat');
 tol = 10^-12;
-partitionBnd = 6;                       % max # partitions that can occur before terminating
+partitionBnd = 4;                       % max # partitions that can occur before terminating
 partitionNum = 0;
 load('xr(0.0.01.2).mat');
 % load('ur(0.0.01.2).mat');
