@@ -1,0 +1,10 @@
+totalArea = 0;
+
+for i = 1:size(initial_radii, 1)
+    width = initial_radii(i, 1) * 2;  % 宽度是直径
+    height = initial_radii(i, 2) * 2; % 高度是直径
+    area = width * height;
+    totalArea = totalArea + area;
+end
+
+disp(['初始区域的面积为：', num2str(totalArea)]);
