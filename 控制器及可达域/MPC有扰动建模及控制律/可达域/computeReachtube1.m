@@ -1,15 +1,6 @@
 function [cov,safeflag,unsafeflag]=computeReachtube1(cov)
-global dim time_span tol fulldim F Aall Ball
+global dim time_span tol fulldim F Aall Ball xr206 ur206
 % tol = 10^-12;
-% syms p t
-% load('Jaccobi.mat');
-
-load('xr206.mat');
-load('ur206.mat');
-% load('F_origin.mat');
-% load('F线性有扰动.mat');
-% Ad = subs(Ak, t, p);
-% Bd = subs(Bk, t, p);
 timespan = cov.t0:0.01:cov.t0+0.1;
 options = odeset('RelTol',1e-12,'AbsTol',1e-12);
 init_state=cov.x0;
@@ -26,10 +17,6 @@ for t=timespan
     dx(k,:)=x(k,:)-xr206(kk,:);
     du(k,:)=(F(:,:,kk)*dx(k,:)')';
     u(k,:)=du(k,:)+ur206(kk,:);
-    %     u0=u(k,:);
-    %     u0=u0';
-    %     A = subs(Ad, p, t);
-    %     B = subs(Bd, p, t);
     A = Aall(:,:,kk);
     B = Ball(:,:,kk);
     closed_loop = A + B * F(:,:,kk);
@@ -52,10 +39,6 @@ for i = 1:dim
         dxtemp(k,:)=xtemp(k,:)-xr206(kk,:);
         dutemp(k,:)=(F(:,:,kk)*dxtemp(k,:)')';
         utemp(k,:)=dutemp(k,:)+ur206(kk,:);
-        %         u0=utemp(k,:);
-        %         u0=u0';
-        %         A = subs(Ad, p, t);
-        %         B = subs(Bd, p, t);
         A = Aall(:,:,kk);
         B = Ball(:,:,kk);
         closed_loop = A + B * F(:,:,kk);
@@ -74,10 +57,6 @@ for i = 1:dim
     
     V{i} = x(:,1:dim)- xtemp(:,1:dim);
 end
-% figure;
-% hold on;
-% plot(x(:,5), x(:,6), 'Color', 'r', 'LineWidth', 2);
-% plot(xtemp(:,5), xtemp(:,6), 'Color', 'b', 'LineWidth', 2);
 
 cov.T = timespan';
 cov.X = [x,zeros(size(x, 1), 1)];
@@ -129,7 +108,7 @@ unsafeflag = 0;
 % end
 
 %%%%% Check if safety properties of current mode are satisfied %%%%%
-[safeflag,~] = isSafe(cov.x0,cov.Xup,cov.Xlow,cov.T,cov.deltae,cov.TT);
+[safeflag,~] = isSafe(cov.x0,cov.Xup,cov.Xlow,cov.T,cov.deltae,cov.TT,xr206);
 % subplot(1, 2, 2);
 % for i = 1:length(cov.T)
 %     reach = horzcat([cov.Xup(i,5); cov.Xup(i,5); ...

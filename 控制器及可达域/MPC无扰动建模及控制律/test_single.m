@@ -10,87 +10,19 @@ syms p
 % Ad = subs(Ak, t, p);
 % Bd = subs(Bk, t, p);
 % x(1,:)=[9.9735   -0.0005    0.2442   -0.0034    -0.6   -0.8];
-x(1,:)=xr206(1,:)+[0 0 0 0 -1 -1]; 
+x(1,:)=xr206(1,:)+[0 0 0 0 1 -1]; 
 for t=0:0.01:2
     dx(k,:)=x(k,:)-xr206(k,:);
     du(k,:)=(F(:,:,k)*dx(k,:)')';
     u(k,:)=du(k,:)+ur206(k,:);
     u0=u(k,:);
     u0=u0';
-%     if 1<=k&&k<=11
-%         A = Aall(:,:,1);
-%         B = Ball(:,:,1);
-%     elseif k>=12&&k<=21
-%         A = Aall(:,:,2);
-%         B = Ball(:,:,2);
-%     elseif k>=22&&k<=31
-%         A = Aall(:,:,3);
-%         B = Ball(:,:,3);
-%     elseif k>=32&&k<=41
-%         A = Aall(:,:,4);
-%         B = Ball(:,:,4);
-%     elseif k>=42&&k<=51
-%         A = Aall(:,:,5);
-%         B = Ball(:,:,5);
-%     elseif k>=52&&k<=61
-%         A = Aall(:,:,6);
-%         B = Ball(:,:,6);
-%     elseif k>=62&&k<=71
-%         A = Aall(:,:,7);
-%         B = Ball(:,:,7);
-%     elseif k>=72&&k<=81
-%         A = Aall(:,:,8);
-%         B = Ball(:,:,8);
-%     elseif k>=82&&k<=91
-%         A = Aall(:,:,9);
-%         B = Ball(:,:,9);
-%     elseif k>=92&&k<=101
-%         A = Aall(:,:,10);
-%         B = Ball(:,:,10);
-%     elseif k>=102&&k<=111
-%         A = Aall(:,:,11);
-%         B = Ball(:,:,11);
-%     elseif k>=112&&k<=121
-%         A = Aall(:,:,12);
-%         B = Ball(:,:,12);
-%     elseif k>=122&&k<=131
-%         A = Aall(:,:,13);
-%         B = Ball(:,:,13);
-%     elseif k>=132&&k<=141
-%         A = Aall(:,:,14);
-%         B = Ball(:,:,14);
-%     elseif k>=142&&k<=151
-%         A = Aall(:,:,15);
-%         B = Ball(:,:,15);
-%     elseif k>=152&&k<=161
-%         A = Aall(:,:,16);
-%         B = Ball(:,:,16);
-%     elseif k>=162&&k<=171
-%         A = Aall(:,:,17);
-%         B = Ball(:,:,17);
-%     elseif k>=172&&k<=181
-%         A = Aall(:,:,18);
-%         B = Ball(:,:,18);
-%     elseif k>=182&&k<=191
-%         A = Aall(:,:,19);
-%         B = Ball(:,:,19);
-%     elseif k>=192&&k<=201
-%         A = Aall(:,:,20);
-%         B = Ball(:,:,20);
-%     else
-%         A = Aall(:,:,21);
-%         B = Ball(:,:,21);
-%     end
-    A = subs(Ad, p, t);
-    B = subs(Bd, p, t);
+    A = Aall(:,:,k);
+    B = Ball(:,:,k);
     closed_loop = A + B * F(:,:,k);
-%     closed_loop = A + B * F(:,:,k);
 %     tspan = t:0.01:t+0.01;
 %     [t, sol]=ode45(@(t,x)linear_model(t,x,closed_loop),tspan,dx(k,:)');
     
-%     if k<206
-%         x(k+1,:) = sol(end,:)+ xr206(k+1,:);
-%     end
     if k<206
         x(k+1,:) = (closed_loop*dx(k,:)')'+ xr206(k+1,:);
     end

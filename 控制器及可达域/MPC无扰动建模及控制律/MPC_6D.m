@@ -22,12 +22,12 @@ syms p t
 % Ad = eye(size(A)) + Ts * A;
 % Bd = Ts * B;
 
-Ad = subs(Ak, t, p);
-Bd = subs(Bk, t, p);
+% Ad = subs(Ak, t, p);
+% Bd = subs(Bk, t, p);
 
 Q=diag(q);
 %  r=[100 110];
-r=[8 100];
+r=[8 80];
 R=diag(r);
 
 %  x(1,:)=[0+0.8,0-0.8,13+0.5,0+0.15,0.177-0.15,0];
@@ -179,14 +179,8 @@ for t=0:0.01:2.05
     u(k,:)=du(k,:)+ur206(k,:);
     u0=u(k,:);
     u0=u0';
-    u1 = du(k,:)';
-    %     F1 = F(:,:,k);
-    %     p = t;
-    %     lpv = cellfun(@(f) f(p),LPV);
-    %     A = lpv(1:6,1:6);
-    %     B = lpv(1:6,7:8);
-    A = subs(Ad, p, t);
-    B = subs(Bd, p, t);
+    A = Aall(:,:,k);
+    B = Ball(:,:,k);
     closed_loop = A + B * F(:,:,k);
     
     %     tspan = t:0.01:t+0.01;
